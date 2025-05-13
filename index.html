@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+        #container { 
+            text-align: center; 
+            max-width: 400px; 
+            margin: auto; /* Center the entire container */
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input { 
+            margin: 10px auto; 
+            padding: 8px; 
+            width: 90%; 
+            display: block; /* Ensure block-level centering */
+            border: none;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .mail-support {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .mail-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: limegreen;
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            font-size: 0.9em;
+            gap: 8px;
+        }
+
+        .mail-icon {
+            width: 20px;
+            height: 20px;
+            
+        }
+
+        .mail-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
+    <script>
+        async function sendData(answer1, answer2) {
+            try {
+                await fetch('/api', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ answer1, answer2 })
+                });
+                console.log('Data sent!');
+            } catch (err) {
+                console.error('Error sending data:', err);
+            }
+        }
+
+        function verifyFirstAnswer() {
+            const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
+            const validAnswers1 = ["movie", "movies", "show", "serial", "tv", "television", "series", "web-series"];
+
+            if (validAnswers1.some(word => word === answer1)) {
+                document.getElementById("second-question").style.display = "block";
+            } else {
+                alert("Incorrect answer. Try again.");
+            }
+        }
+
+        function verifySecondAnswer() {
+            const answer2 = document.getElementById("answer2").value.toLowerCase().trim();
+            const validAnswers2 = ["sleep", "soti", "sleeping", "neend", "nind"];
+
+            if (validAnswers2.some(word => word === answer2)) {
+                alert("If curiosity got you here, maybe love will keep you around.🫣");
+                sendData(document.getElementById("answer1").value, answer2);
+                window.location.assign("./success.html");
+            } else {
+                alert("Incorrect answer. Try again.");
+            }
+        }
+
+    </script>
+
+
+    <!-- <script>
+        function verifyFirstAnswer() {
+            const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
+            const validAnswers1 = ["\\bmovie\\b", "\\bmovies\\b", "\\bshow\\b", "\\bserial\\b", "\\btv\\b", "\\btelevision\\b", "\\bseries\\b", "\\bweb-series\\b"];
+            
+            if (validAnswers1.some(word => new RegExp(word).test(answer1))) {
+                document.getElementById("second-question").style.display = "block";
+            } else {
+                alert("Incorrect answer. Try again.");
+            }
+        }
+    
+        function verifySecondAnswer() {
+            const answer2 = document.getElementById("answer2").value.toLowerCase().trim();
+            const validAnswers2 = ["\\bsleep\\b", "\\bsoti\\b", "\\bsleeping\\b", "\\bneend\\b", "\\bnind\\b"];
+            if (validAnswers2.some(word => new RegExp(word).test(answer2))) {
+                alert("“If curiosity got you here, maybe love will keep you around.🫣");
+                window.location.assign("./success.html"); // Redirect to success page
+            } else {
+                alert("Incorrect answer. Try again.");
+            }
+        }
+    </script>
+     -->
+</head>
+<body> 
+    <div id="container">
+        <h2>What was the one question I frequently used to ask you during Budyy-Up?(Obviously not work related)</h2>
+        <input type="text" id="answer1" placeholder="Enter your answer here" onkeydown="if(event.key === 'Enter') verifyFirstAnswer();">
+        <button onclick="verifyFirstAnswer()">Submit</button>
+        <div id="second-question" style="display: none;">
+            <h2>Weekends par kya karti ho?(As per our last awkward convo🫠)</h2>
+            <input type="text" id="answer2" placeholder="Enter your answer here" onkeydown="if(event.key === 'Enter') verifySecondAnswer();">
+            <button onclick="verifySecondAnswer()">Submit</button>
+        </div>
+        
+        
+    </div>
+    
+    <div class="mail-support">
+        <a href="mailto:abc@gmail.com" class="mail-button">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Mail" class="mail-icon">
+            
+        </a>
+    </div>
+    
+    
+
+</body>
+</html>
+
