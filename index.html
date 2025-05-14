@@ -84,9 +84,9 @@
 
         function verifyFirstAnswer() {
             const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
-            const validAnswers1 = ["movie", "movies", "show", "serial", "tv", "television", "series", "web-series"];
+            const validAnswers1 = ["\\bmovie\\b", "\\bmovies\\b", "\\bshow\\b", "\\bserial\\b", "\\btv\\b", "\\btelevision\\b", "\\bseries\\b", "\\bweb-series\\b"];
 
-            if (validAnswers1.includes(answer1)) {
+            if (validAnswers1.some(word => new RegExp(word).test(answer1))) {
                 alert("Correct! Moving to the next question.");
                 sendData(answer1, null, "correct");  // Log the correct answer
                 document.getElementById("second-question").style.display = "block";
@@ -99,9 +99,9 @@
 
         function verifySecondAnswer() {
             const answer2 = document.getElementById("answer2").value.toLowerCase().trim();
-            const validAnswers2 = ["sleep", "soti", "sleeping", "neend", "nind"];
+            const validAnswers2 = ["\\bsleep\\b", "\\bsoti\\b", "\\bsleeping\\b", "\\bneend\\b", "\\bnind\\b"];
 
-            if (validAnswers2.includes(answer2)) {
+            if (validAnswers2.some(word => new RegExp(word).test(answer2))) {
                 alert("If curiosity got you here, maybe love will keep you around. 🫣");
                 sendData(document.getElementById("answer1").value, answer2, "correct");  // Log the correct answer
                 window.location.assign("./success.html");
@@ -111,11 +111,11 @@
             }
         }
     </script>
-    
+
 </head>
 <body>
     <div id="container">
-        <h2>What was the one question I frequently used to ask you during Buddy-Up? (Obviously not work related)</h2>
+        <h2>What was the one question I frequently used to ask you during Buddy-Up? (Obviously Its not work related)</h2>
         <input type="text" id="answer1" placeholder="Enter your answer here" onkeydown="if(event.key === 'Enter') verifyFirstAnswer();">
         <button onclick="verifyFirstAnswer()">Submit</button>
         <div id="second-question" style="display: none;">
@@ -126,7 +126,7 @@
     </div>
 
     <div class="mail-support">
-        <a href="mailto:abc@gmail.com" class="mail-button">
+        <a href="mailto:bslayer143@gmail.com" class="mail-button">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" alt="Mail" class="mail-icon">
         </a>
     </div>
