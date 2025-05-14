@@ -1,15 +1,15 @@
 module.exports = async (req, res) => {
-    console.log('API hit');
     if (req.method === 'POST') {
         try {
-            const data = await req.body;
-            console.log('Received data:', data); // Log the data
-            res.status(200).json({ message: 'Data received' });
-        } catch (err) {
-            console.error('Error:', err);
-            res.status(500).json({ error: 'Server error' });
+            const data = req.body;
+            console.log("API hit");
+            console.log("Received data:", data);
+            res.status(200).json({ message: "Data received" });
+        } catch (error) {
+            console.error("Error processing data:", error);
+            res.status(500).json({ error: "Internal Server Error" });
         }
     } else {
-        res.status(405).json({ error: 'Method not allowed' });
+        res.status(405).json({ error: "Method Not Allowed" });
     }
 };
