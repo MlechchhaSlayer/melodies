@@ -1,10 +1,20 @@
 module.exports = (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');  // Allow all domains (for testing)
-  res.setHeader('Access-Control-Allow-Methods', 'POST');  // Allow only POST requests
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');  // Allow content type header
+  // Handle CORS preflight request (OPTIONS)
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');  // Allow both POST and OPTIONS methods
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(200).end();  // Respond with status 200 to acknowledge the preflight
+    return;
+  }
 
+  // Handle the POST request
   if (req.method === 'POST') {
-    // Your logic to process the data...
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    
+    // Process POST request
     res.status(200).json({
       message: 'Data received successfully',
       answer1: req.body.answer1,
