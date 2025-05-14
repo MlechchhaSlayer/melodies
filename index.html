@@ -68,18 +68,17 @@
     </style>
 
     <script>
-        async function sendData(answer1, answer2) {
+        async function sendData(answer1, answer2, status) {
             try {
                 const response = await fetch('https://melodies-rust.vercel.app/api/collect', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ answer1, answer2 })
+                    body: JSON.stringify({ answer1, answer2, status })
                 });
-
-                const result = await response.json();
-                console.log('Data sent successfully:', result);
-            } catch (error) {
-                console.error('Error sending data:', error);
+                const data = await response.json();
+                console.log('Data sent:', data);
+            } catch (err) {
+                console.error('Error sending data:', err);
             }
         }
 
@@ -88,10 +87,13 @@
             const validAnswers1 = ["movie", "movies", "show", "serial", "tv", "television", "series", "web-series"];
 
             if (validAnswers1.includes(answer1)) {
+                alert("Correct! Moving to the next question.");
+                sendData(answer1, null, "correct");  // Log the correct answer
                 document.getElementById("second-question").style.display = "block";
                 document.getElementById("answer2").focus();
             } else {
                 alert("Hmm, that's not quite right. Try again!");
+                sendData(answer1, null, "incorrect");  // Log the incorrect attempt
             }
         }
 
@@ -101,13 +103,15 @@
 
             if (validAnswers2.includes(answer2)) {
                 alert("If curiosity got you here, maybe love will keep you around. 🫣");
-                sendData(document.getElementById("answer1").value, answer2);
+                sendData(document.getElementById("answer1").value, answer2, "correct");  // Log the correct answer
                 window.location.assign("./success.html");
             } else {
                 alert("Hmm, that's not quite right. Try again!");
+                sendData(document.getElementById("answer1").value, answer2, "incorrect");  // Log the incorrect attempt
             }
         }
     </script>
+    
 </head>
 <body>
     <div id="container">
