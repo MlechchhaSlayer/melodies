@@ -84,16 +84,18 @@
     <script>
         async function sendData(answer1, answer2) {
             try {
-                await fetch('https://melodies-rust.vercel.app/api', {  // Corrected URL
+                const response = await fetch('https://melodies-rust.vercel.app/api/index', { 
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ answer1, answer2 })
                 });
-                console.log('Data sent!');
+                const result = await response.json();
+                console.log('Data sent:', result);
             } catch (err) {
                 console.error('Error sending data:', err);
             }
         }
+
 
         function verifyFirstAnswer() {
             const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
