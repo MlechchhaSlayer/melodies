@@ -1,14 +1,13 @@
-module.exports = (req, res) => {
+export default function handler(req, res) {
+    console.log('Request Method:', req.method);  // Log the request method
+    console.log('Request Body:', req.body);      // Log the request body
+    
     if (req.method === 'POST') {
         const { answer1, answer2 } = req.body;
-
-        // Log the data (you can replace this with your actual data handling logic)
-        console.log('Received data:', { answer1, answer2 });
-
-        res.status(200).json({ message: "Data received!" });
-    } else if (req.method === 'GET') {
-        res.status(200).json({ message: "API is working!" });
+        console.log('Received answers:', answer1, answer2);  // Log received answers
+        res.status(200).json({ message: 'Data received' });
     } else {
-        res.status(405).json({ error: "Method Not Allowed" });
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
     }
-};
+}
