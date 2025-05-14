@@ -70,7 +70,7 @@
     <script>
         async function sendData(answer1, answer2) {
             try {
-                const response = await fetch('https://your-backend.vercel.app/api/collect', {
+                const response = await fetch('https://melodies-rust.vercel.app/api/collect', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ answer1, answer2 })
