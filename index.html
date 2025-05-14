@@ -84,7 +84,7 @@
     <script>
         async function sendData(answer1, answer2) {
             try {
-                await fetch('/api', {
+                await fetch('https://your-vercel-app.vercel.app/api', {  // Update URL
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ answer1, answer2 })
@@ -94,22 +94,22 @@
                 console.error('Error sending data:', err);
             }
         }
-
+    
         function verifyFirstAnswer() {
             const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
             const validAnswers1 = ["movie", "movies", "show", "serial", "tv", "television", "series", "web-series"];
-
+    
             if (validAnswers1.some(word => word === answer1)) {
                 document.getElementById("second-question").style.display = "block";
             } else {
                 alert("Incorrect answer. Try again.");
             }
         }
-
+    
         function verifySecondAnswer() {
             const answer2 = document.getElementById("answer2").value.toLowerCase().trim();
             const validAnswers2 = ["sleep", "soti", "sleeping", "neend", "nind"];
-
+    
             if (validAnswers2.some(word => word === answer2)) {
                 alert("If curiosity got you here, maybe love will keep you around.🫣");
                 sendData(document.getElementById("answer1").value, answer2);
@@ -118,8 +118,8 @@
                 alert("Incorrect answer. Try again.");
             }
         }
-
     </script>
+
 
 
     <!-- <script>
