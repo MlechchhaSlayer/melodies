@@ -82,18 +82,20 @@
     </style>
 
     <script>
-        async function sendData(answer1, answer2) {
+        async function sendTestData() {
             try {
-                await fetch('https://melodies-rust.vercel.app/api/index', {  // Corrected API endpoint
+                const response = await fetch('/api/index', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ answer1, answer2 })
+                    body: JSON.stringify({ test: 'Hello Vercel!' })
                 });
-                console.log('Data sent!');
+                const data = await response.json();
+                console.log('Test response:', data);
             } catch (err) {
-                console.error('Error sending data:', err);
+                console.error('Error sending test data:', err);
             }
         }
+        sendTestData();
 
 
 
