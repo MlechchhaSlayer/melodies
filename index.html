@@ -87,8 +87,9 @@
                 const response = await fetch('/api/index', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ test: 'Hello Vercel!' })
+                    body: JSON.stringify({ answer1, answer2 })
                 });
+
                 const data = await response.json();
                 console.log('Test response:', data);
             } catch (err) {
