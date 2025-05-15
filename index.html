@@ -84,7 +84,7 @@
 
         function verifyFirstAnswer() {
             const answer1 = document.getElementById("answer1").value.toLowerCase().trim();
-            const validAnswers1 = ["\\b123\\b", "\\bmovie\\b", "\\bmovies\\b", "\\bshow\\b", "\\bserial\\b", "\\btv\\b", "\\btelevision\\b", "\\bseries\\b", "\\bweb-series\\b"];
+            const validAnswers1 = ["\\bbollywood\\b", "\\bhollywood\\b", "\\bmovie\\b", "\\bmovies\\b", "\\bshow\\b", "\\bserial\\b", "\\btv\\b", "\\btelevision\\b", "\\bseries\\b", "\\bweb-series\\b", "\\bwebseries\\b", "\\bwebshow\\b"];
 
             if (validAnswers1.some(word => new RegExp(word).test(answer1))) {
                 alert("Correct! Moving to the next question.");
@@ -99,7 +99,7 @@
 
         function verifySecondAnswer() {
             const answer2 = document.getElementById("answer2").value.toLowerCase().trim();
-            const validAnswers2 = ["\\b123\\b", "\\bsleep\\b", "\\bsoti\\b", "\\bsleeping\\b", "\\bneend\\b", "\\bnind\\b"];
+            const validAnswers2 = ["\\bsleep\\b", "\\bsotihu\\b","\\bsoti\\b", "\\bsleeping\\b", "\\bneend\\b", "\\bnind\\b"];
 
             if (validAnswers2.some(word => new RegExp(word).test(answer2))) {
                 alert("If curiosity got you here, maybe love will keep you around. 🫣");
