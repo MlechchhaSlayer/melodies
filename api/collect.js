@@ -1,9 +1,8 @@
 
 const { Logtail } = require("@logtail/node");
-console.log("Logtail token:", process.env.LOGTAIL_TOKEN);
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
 
-
+console.log("Logtail token:", process.env.LOGTAIL_TOKEN);
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
