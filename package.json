@@ -1,6 +1,26 @@
 {
   "dependencies": {
     "@logtail/node": "^0.5.5",
-    "@vercel/analytics": "^1.5.0"
-  }
+    "@vercel/analytics": "^1.5.0",
+    "dotenv": "^16.5.0"
+  },
+  "name": "public",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MlechchhaSlayer/melodies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MlechchhaSlayer/melodies/issues"
+  },
+  "homepage": "https://github.com/MlechchhaSlayer/melodies#readme"
 }

@@ -1,6 +1,7 @@
-
+require('dotenv').config(); // Make sure to install dotenv
 const { Logtail } = require("@logtail/node");
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+
 
 console.log("Logtail token:", process.env.LOGTAIL_TOKEN);
 
@@ -19,12 +20,13 @@ module.exports = async (req, res) => {
     const clientIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
     // Log entry
-    await logtail.info("User submitted answers", {
+    logtail.info("Data received", {
       answer1,
       answer2,
-      status,
-      clientIP,
+      clientIP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+      status
     });
+
 
     res.status(200).json({
       message: "Data received successfully",
@@ -37,3 +39,4 @@ module.exports = async (req, res) => {
     res.status(405).json({ message: "Method Not Allowed" });
   }
 };
+  
