@@ -1,5 +1,7 @@
 const { Logtail } = require("@logtail/node");
 
+console.log("Logtail Token:", process.env.LOGTAIL_TOKEN);
+
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
 
 module.exports = async (req, res) => {
