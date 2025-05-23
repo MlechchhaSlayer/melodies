@@ -1,4 +1,7 @@
-module.exports = (req, res) => {
+const { Logtail } = require("@logtail/node");
+const logtail = new Logtail("kJJweKNzMXwjXTKHjh4WwZGy"); // 🔁 Replace with your actual token
+
+module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -9,8 +12,19 @@ module.exports = (req, res) => {
 
   if (req.method === 'POST') {
     const { answer1, answer2, status } = req.body;
-    console.log('Received:', { answer1, answer2, status });
-    console.log('Client IP:', req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+    const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    const logData = {
+      answer1,
+      answer2,
+      status,
+      clientIP,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Log to console and Logtail
+    console.log('Received:', logData);
+    await logtail.info("Form submission received", logData);
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -18,10 +32,7 @@ module.exports = (req, res) => {
 
     res.status(200).json({
       message: 'Data received successfully',
-      answer1,
-      answer2,
-      status,
-      clientIP: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+      ...logData
     });
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
